@@ -1,0 +1,110 @@
+#STPGPage { position: relative; }
+#STPG #STPGPageRouter {
+	margin: 5px 0;
+	padding: 0;
+}
+#STPG #STPGPageRouter li {
+	margin: 0;
+	padding: 5px 10px 5px 20px;
+	display: inline;
+	list-style-type: none;
+	background: url("images/li_router.png") no-repeat 0 5px;
+}
+
+/* layout */
+#STPGPageHeader {
+	margin: 0 0 10px 0;
+	padding: 0;
+	height: 80px;
+}
+#STPGPageContentLeft { float: left; width: 80%; }
+#STPGPageContentRight { float: right; width: 80%; }
+#STPGPageContentAll { width: 100%; }
+#STPGPageMenuRight { float: right; width: 18%; }
+#STPGPageMenuLeft { float: left; width: 18%; }
+#STPGPageMenuNone { display: none; }
+
+#STPGPage { position: relative; }
+#STPGPageHeader {
+	border: 1px solid #4652A0;
+	background: url("images/bg_header.png") repeat-x;
+}
+#STPGPage #STPGPageHeaderNavigationWithHD {
+	position: absolute;
+	top: 5px;
+	right: 10px;
+}
+#STPGPage #STPGPageHeaderNavigationWithHD li { display: inline; }
+#STPGPage #STPGPageHeaderNavigationNoHD  {
+	margin-bottom: 5px;
+	padding: 5px;
+	background: #DDD;
+}
+#STPGPage #STPGPageHeaderNavigationNoHD  ul{ text-align: right; }
+#STPGPage #STPGPageHeaderNavigationNoHD li { display: inline; }
+#STPGPageMenuRight, #STPGPageMenuLeft {
+	padding: 0;
+	border: 1px solid #CCC;
+}
+
+#STPGPageSiteTitle {
+	margin: 5px 0 0 10px;
+	padding: 0;
+	font-size: medium;
+	font-weight: bold;
+	color: #139EE8;
+}
+#STPGPageSiteTitle a { font-weight: bold; color: #139EE8; }
+#STPGPageSiteTitle a:hover { text-decoration: none; }
+#STPGPageSiteSlogan {
+	margin: 5px 0 0 10px;
+	padding: 0;
+	font-size: small;
+	font-weight: normal;
+	color: #C2CAD1;
+}
+
+#STPGPagePageTitle {
+	margin: 0 0 10px 0;
+	padding: 5px 0 5px 5px;
+	font-size: medium;
+	font-weight: bold;
+	background: #2A75C5;
+	color: #FFF;
+	border: 1px solid #4652A0;
+}
+
+#STPGPageListFiles dd div {
+	width: 100px;
+	text-align: center;
+	float: left;
+}
+#STPGPageListFiles dd ul li {
+	margin: 0 100px;
+	padding: 5px 0 5px 20px;
+}
+#STPGPageListFiles dd form ul li {
+	margin: 0;
+}
+#STPGPageListFiles .STPGPageListFilesDelete { background: none; }
+#STPGPageListFiles .STPGPageListFilesDelete a {
+	margin: 0 5px 0 0;
+	padding: 3px 10px; 
+	border: 1px solid #CCC;
+	background: url("images/li_buttonlist.png") repeat-x;
+	font-weight: bold;
+	color: #333;
+}
+#STPGPageListFiles .STPGPageListFilesDelete a:hover { text-decoration: none; }
+
+.STPGPageBlockTitle {
+	margin: 0;
+	padding: 5px;
+	background: #DDD;
+	color: #2A75C5;
+	font-weight: bold;
+}
+#STPGPage .STPGPageBlockPagetypeFolder { background: url("images/li_pagefolder.png") no-repeat 5px 10px; }
+#STPGPage .STPGPageBlockPagetypePage { background: url("images/li_pagepage.png") no-repeat 5px 10px; }
+
+#STPGPage .STPGPageThefile { background: #EEE; }

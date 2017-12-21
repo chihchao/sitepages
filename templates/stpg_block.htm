@@ -1,0 +1,42 @@
+<div id="STPG">
+<{if $tplvar.auth.is_site_managers}>
+<ul id="STPGToolbar">
+	<li><a href="site.php?option=add" title="<{$smarty.const._MD_STPG_SITE_ADDSITE}>"><{$smarty.const._MD_STPG_SITE_ADDSITE}></a></li>
+<{if $tplvar.sid}>
+	<li><a href="block.php?option=add" title="<{$smarty.const._MD_STPG_BLOCK_ADDBLOCK}>"><{$smarty.const._MD_STPG_BLOCK_ADDBLOCK}></a></li>
+<{/if}>
+</ul>
+<{/if}>
+<ul id="STPGRouter">
+	<li><a href="index.php" title="<{$tplvar.module_name}>"><{$tplvar.module_name}></a></li>
+	<li><a href="site.php?option=edt&sid=<{$tplvar.sid}>" title="<{$smarty.const._MD_STPG_SITE_EDTSITE}>"><{$smarty.const._MD_STPG_SITE_EDTSITE}></a></li>
+	<li><a href="<{$smarty.server.REQUEST_URI}>" title="<{$tplvar.header}>"><{$tplvar.header}></a></li>
+</ul>
+<div id="STPGHeader"><{$tplvar.header}></div>
+<form id="STPGForm" method="post" action="<{$smarty.server.REQUEST_URI}>">
+<fieldset>
+<legend><{$tplvar.header}></legend>
+	<dl>
+	<dt><label for="STPGFormTitle"><{$smarty.const._MD_STPG_BLOCK_TITLE}></label></dt>
+	<dd><input type="text" id="STPGFormTitle" name="title" value="<{$tplvar.block.title}>" /></dd>
+	<{if $tplvar.option == 'add' || !$tplvar.block.block_type}>
+	<dt><label for="STPGFormContent"><{$smarty.const._MD_STPG_BLOCK_CONTENT}></label></dt>
+	<dd>
+		<p><{$smarty.const._MD_STPG_BLOCK_CONTENT_DESC}></p>
+		<textarea id="STPGFormTinymceContent" name="tinymce_content"><{$tplvar.block.content}></textarea>
+	</dd>
+	<{/if}>
+	<dd>
+	<input type="checkbox" id="STPGFormAppearall" name="appear_all" value="1" /><label for="STPGFormAppearall"><{$smarty.const._MD_STPG_BLOCK_APPEARALL}></label><br />
+	<{if $tplvar.option == 'edt'}>
+	<input type="checkbox" id="STPGFormDisappearall" name="disappear_all" value="1" /><label for="STPGFormDisappearall"><{$smarty.const._MD_STPG_BLOCK_DISAPPEARALL}></label>
+	<{/if}>
+	</dd>
+	<dd>
+	<input type="submit" value="<{$smarty.const._SEND}>" /><input type="reset" value="<{$smarty.const._MD_STPG_RESET}>" />
+	<input type="hidden" name="submitted" value="true" />
+	</dd>
+	</dl>
+</fieldset>
+</form>
+</div>

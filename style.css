@@ -1,0 +1,90 @@
+#STPG { position: relative; }
+#STPG p, li, dt, dd, div {
+	color: #606060;
+	font-size: small;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	line-height: 150%;
+}
+#STPG dl { margin: 0; padding: 0; }
+#STPG dl dt {
+	clear: both;
+	margin: 0;
+	padding: 5px 0 0 20px;
+	font-weight: bold;
+}
+#STPG dl dd {
+	margin: 0;
+	padding: 5px 0 5px 20px;
+}
+
+#STPG a { color: #36A; text-decoration: none; font-weight: normal; }
+#STPG a:hover { text-decoration: underline; }
+
+#STPG ul { margin: 0; padding: 0; list-style-position: outside; }
+
+#STPG li { margin: 0; padding: 5px 0 5px 20px; list-style-type: none; }
+#STPG dt, #STPG li { background: url("images/li_dt.png") no-repeat 5px 10px; }
+
+#STPG { mragin-bottom: 10px; }
+
+#STPG #STPGToolbar {
+	margin: 0 0 5px 0;
+	padding: 10px 0 5px 0;
+	text-align: right;
+	border: 1px solid #CCC;
+	background: url("images/bg_toolbar.png") repeat-x;
+}
+#STPG #STPGToolbar li {
+	margin:0;
+	padding: 0;
+	display: inline;
+	list-style-type: none;
+	background: none;
+}
+#STPG #STPGToolbar li a {
+	margin: 0 5px 0 0;
+	padding: 3px 10px;
+	font-weight: bold;
+	color: #606060;
+	background: #FFF;
+}
+#STPG #STPGToolbar li a:hover { text-decoration: none; color: #FFF; background: #606060; }
+
+#STPG #STPGRouter {
+	margin: 5px 0;
+	padding: 0;
+}
+#STPG #STPGRouter li {
+	margin: 0;
+	padding: 5px 10px 5px 20px;
+	display: inline;
+	list-style-type: none;
+	background: url("images/li_router.png") no-repeat 0 5px;
+}
+
+#STPGHeader {
+	font-size: large;
+	font-weight: bold;
+}
+
+#STPGFormTinymceContent { width: 99%; height: 480px; }
+
+#STPG .STPGButtonList {
+	margin: 5px 0;
+	padding: 0;
+}
+#STPG .STPGButtonList li {
+	margin: 0;
+	padding: 0;
+	display: inline;
+	background: none;
+}
+#STPG .STPGButtonList li a {
+	margin: 0;
+	padding: 3px 10px; 
+	border: 1px solid #CCC;
+	background: url("images/li_buttonlist.png") repeat-x;
+	font-weight: bold;
+	color: #333;
+}
+#STPG .STPGButtonList li a:hover { text-decoration: none; }

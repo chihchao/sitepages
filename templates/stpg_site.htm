@@ -1,0 +1,76 @@
+<div id="STPG">
+<{if $tplvar.auth.is_site_managers}>
+<ul id="STPGToolbar">
+	<li><a href="site.php?option=add" title="<{$smarty.const._MD_STPG_SITE_ADDSITE}>"><{$smarty.const._MD_STPG_SITE_ADDSITE}></a></li>
+<{if $tplvar.sid}>
+	<li><a href="block.php?option=add&sid=<{$tplvar.sid}>" title="<{$smarty.const._MD_STPG_BLOCK_ADDBLOCK}>"><{$smarty.const._MD_STPG_BLOCK_ADDBLOCK}></a></li>
+<{/if}>
+</ul>
+<{/if}>
+<ul id="STPGRouter">
+	<li><a href="index.php" title="<{$tplvar.module_name}>"><{$tplvar.module_name}></a></li>
+	<li><a href="<{$smarty.server.REQUEST_URI}>" title="<{$tplvar.header}>"><{$tplvar.header}></a></li>
+</ul>
+<div id="STPGHeader"><{$tplvar.header}></div>
+<form id="STPGForm" method="post" action="<{$smarty.server.REQUEST_URI}>">
+<fieldset>
+	<legend><{$tplvar.header}></legend>
+	<dl>
+	<dt><label for="STPGFormTitle"><{$smarty.const._MD_STPG_SITE_TITLE}></label></dt>
+	<dd><input type="text" id="STPGFormTitle" name="title" value="<{$tplvar.site.title}>" /></dd>
+	<dt><label for="STPGFormSlogan"><{$smarty.const._MD_STPG_SITE_SLOGAN}></label></dt>
+	<dd><input type="text" id="STPGFormSlogan" name="slogan" value="<{$tplvar.site.slogan}>" /></dd>
+	<dt><label for="STPGFormEdituids"><{$smarty.const._MD_STPG_SITE_EDITUIDS}></label></dt>
+	<dd>
+		<select name="edit_uids[]" id="STPGFormEdituids" multiple="multiple" size="5">
+		<{html_options values=$tplvar.form.site_managers.uids selected=$tplvar.site.edit_uids output=$tplvar.form.site_managers.name}>
+		</select>
+	</dd>
+	<dt><{$smarty.const._MD_STPG_SITE_BLOCATION}></dt>
+	<dd>
+		<input type="radio" id="STPGFormBLcationLeft" name="block_location" value="0"<{if $tplvar.option == 'edt' && !$tplvar.site.block_location}> checked="checked"<{/if}> />
+		<label for="STPGFormBLcationLeft"><{$smarty.const._MD_STPG_SITE_BLOCATION_LEFT}></label>&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="radio" id="STPGFormBLcationRight" name="block_location" value="1"<{if $tplvar.option == 'add' || ($tplvar.option == 'edt' && $tplvar.site.block_location)}> checked="checked"<{/if}> />
+		<label for="STPGFormBLcationRight"><{$smarty.const._MD_STPG_SITE_BLOCATION_RIGHT}></label>
+	</dd>
+	<dt><{$smarty.const._MD_STPG_SITE_XOOPSPAGE}></dt>
+	<dd>
+		<input type="radio" id="STPGFormXoopspageNo" name="xoops_page" value="0"<{if $tplvar.option == 'edt' && !$tplvar.site.xoops_page}> checked="checked"<{/if}> />
+		<label for="STPGFormXoopspageNo"><{$smarty.const._MD_STPG_NO}></label>&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="radio" id="STPGFormXoopspageYes" name="xoops_page" value="1"<{if $tplvar.option == 'add' || ($tplvar.option == 'edt' && $tplvar.site.xoops_page)}> checked="checked"<{/if}> />
+		<label for="STPGFormXoopspageYes"><{$smarty.const._MD_STPG_YES}></label>
+	</dd>
+	<dt><label for="STPGFormTheme"><{$smarty.const._MD_STPG_SITE_THEME}></label></dt>
+	<dd>
+		<select name="theme" id="STPGFormTheme">
+		<{html_options values=$tplvar.form.themes selected=$tplvar.site.theme output=$tplvar.form.themes}>
+		</select>
+	</dd>
+	<dd>
+	<input type="submit" value="<{$smarty.const._SEND}>" /><input type="reset" value="<{$smarty.const._MD_STPG_RESET}>" />
+	<input type="hidden" name="submitted" value="true" />
+	</dd>
+	</dl>
+</fieldset>
+</form>
+<{if $tplvar.option == 'edt'}>
+<ul>
+	<{foreach from=$tplvar.blocks item=block name=blocks}>
+	<li><{$block.title}>
+		<ul class="STPGButtonList">
+		<li><a href="block.php?option=edt&sid=<{$tplvar.sid}>&bid=<{$block.id}>" title="<{$smarty.const._MD_STPG_EDIT}>"><{$smarty.const._MD_STPG_EDIT}></a></li>
+		<{if !$block.odr_top}>
+		<li><a href="block.php?option=odr&sid=<{$tplvar.sid}>&bid=<{$block.id}>&uod=u" title="<{$smarty.const._MD_STPG_BLOCK_ORDER_UP}>"><{$smarty.const._MD_STPG_BLOCK_ORDER_UP}></a></li>
+		<{/if}>
+		<{if !$block.odr_bottom}>
+		<li><a href="block.php?option=odr&sid=<{$tplvar.sid}>&bid=<{$block.id}>&uod=d" title="<{$smarty.const._MD_STPG_BLOCK_ORDER_DOWN}>"><{$smarty.const._MD_STPG_BLOCK_ORDER_DOWN}></a></li>
+		<{/if}>
+		<{if $block.deleted}>
+		<li><a href="block.php?option=del&sid=<{$tplvar.sid}>&bid=<{$block.id}>" title="<{$smarty.const._MD_STPG_DELETE}>"><{$smarty.const._MD_STPG_DELETE}></a></li>
+		<{/if}>
+		</ul>
+	</li>
+	<{/foreach}>
+</ul>
+<{/if}>
+</div>

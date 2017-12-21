@@ -1,0 +1,24 @@
+<div id="STPG">
+<{if $tplvar.auth.is_site_managers}>
+<ul id="STPGToolbar">
+	<li><a href="site.php?option=add" title="<{$smarty.const._MD_STPG_SITE_ADDSITE}>"><{$smarty.const._MD_STPG_SITE_ADDSITE}></a></li>
+</ul>
+<{/if}>
+<ul id="STPGRouter">
+	<li><a href="index.php" title="<{$tplvar.module_name}>"><{$tplvar.module_name}></a></li>
+</ul>
+<div id="STPGHeader"><{$tplvar.header}></div>
+<ul>
+<{foreach from=$tplvar.sites item=site name=sites}>
+	<li>
+	<a href="page.php?sid=<{$site.id}>" title="<{$site.title}>"><{$site.title}></a> - <{$site.ownr_uname}>
+	<{if $site.ownr}>
+	<ul class="STPGButtonList">
+	<li><a href="site.php?option=edt&sid=<{$site.id}>" title="<{$smarty.const._MD_STPG_EDIT}>"><{$smarty.const._MD_STPG_EDIT}></a></li>
+	<li><a href="site.php?option=del&sid=<{$site.id}>" title="<{$smarty.const._MD_STPG_DELETE}>"><{$smarty.const._MD_STPG_DELETE}></a></li>
+	</ul>
+	<{/if}>
+	</li>
+<{/foreach}>
+</ul>
+</div>

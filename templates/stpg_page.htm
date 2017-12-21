@@ -1,0 +1,225 @@
+<div id="STPG">
+<{if $tplvar.auth.is_site_edit}>
+<ul id="STPGToolbar">
+<{if $tplvar.auth.is_site_ownr}>
+	<li><a href="site.php?option=edt&sid=<{$tplvar.sid}>" title="<{$smarty.const._MD_STPG_SITE_EDTSITE}>"><{$smarty.const._MD_STPG_SITE_EDTSITE}></a></li>
+<{/if}>
+	<li><a href="page.php?option=add&pof=f&sid=<{$tplvar.sid}>&pid=<{$tplvar.pid}>" title="<{$smarty.const._MD_STPG_PAGE_ADDFOLDER}>"><{$smarty.const._MD_STPG_PAGE_ADDFOLDER}></a></li>
+	<li><a href="page.php?option=add&pof=p&sid=<{$tplvar.sid}>&pid=<{$tplvar.pid}>" title="<{$smarty.const._MD_STPG_PAGE_ADDPAGE}>"><{$smarty.const._MD_STPG_PAGE_ADDPAGE}></a></li>
+	<li><a href="page.php?option=edt&sid=<{$tplvar.sid}>&pid=<{$tplvar.pid}>" title="<{$smarty.const._MD_STPG_PAGE_EDTPAGE}>"><{$smarty.const._MD_STPG_PAGE_EDTPAGE}></a></li>
+	<{if $tplvar.page.pid}>
+	<li><a href="page.php?option=mov&sid=<{$tplvar.sid}>&pid=<{$tplvar.pid}>" title="<{$smarty.const._MD_STPG_PAGE_MOVPAGE}>"><{$smarty.const._MD_STPG_PAGE_MOVPAGE}></a></li>
+	<li><a href="page.php?option=del&sid=<{$tplvar.sid}>&pid=<{$tplvar.pid}>" title="<{$smarty.const._MD_STPG_PAGE_DELPAGE}>"><{$smarty.const._MD_STPG_PAGE_DELPAGE}></a></li>
+	<{/if}>
+</ul>
+<{/if}>
+<{if $tplvar.option == 'add' || $tplvar.option == 'edt'}>
+<ul id="STPGRouter">
+<{foreach from=$tplvar.router item=rtr name=router}>
+	<li><a href="page.php?option=viw&sid=<{$tplvar.sid}>&pid=<{$rtr.id}>" title="<{$rtr.title}>"><{$rtr.title}></a></li>
+<{/foreach}>
+<li><a href="<{$smarty.server.REQUEST_URI}>" title="<{$tplvar.header}>"><{$tplvar.header}></a></li>
+</ul>
+<div id="STPGHeader"><{$tplvar.header}></div>
+<form id="STPGForm" method="post" action="<{$smarty.server.REQUEST_URI}>" enctype="multipart/form-data">
+<fieldset>
+<legend><{$tplvar.header}></legend>
+<dl>
+	<dt><label for="STPGFormTitle"><{$smarty.const._MD_STPG_PAGE_TITLE}></label></dt>
+	<dd><input type="text" id="STPGFormTitle" name="title" value="<{$tplvar.page.title}>" /></dd>
+	<{if ($tplvar.option == 'add' && $tplvar.pof == 'f') || ($tplvar.option == 'edt' && $tplvar.page.page_type)}>
+	<dt><{$smarty.const._MD_STPG_PAGE_FILE}></dt>
+	<dd>
+		<{$smarty.const._MD_STPG_PAGE_FILE_DESC}>
+		<ul id="STPGFormFileField">
+			<li>
+			<input type="file" name="file[]" size="10" /><br />
+			<input type="text" name="description[]" value="" />
+			</li>
+		</ul>
+		<ul>
+			<li id="STPGFormAddField"><input type="button" value="<{$smarty.const._MD_STPG_PAGE_FILE_ADDFIELD}>" /></li>
+		</ul>
+	</dd>
+	<{else}>
+	<dt><label for="STPGFormContent"><{$smarty.const._MD_STPG_PAGE_CONTENT}></label></dt>
+	<dd>
+		<p><{$smarty.const._MD_STPG_PAGE_CONTENT_DESC}></p>
+		<textarea id="STPGFormTinymceContent" name="tinymce_content"><{$tplvar.page.content}></textarea>
+	</dd>
+	<{/if}>
+	<dt><{$smarty.const._MD_STPG_PAGE_HEADER}></dt>
+	<dd>
+		<input type="radio" id="STPGFormHeaderYes" name="header" value="1"<{if $tplvar.option == 'add' || ($tplvar.option == 'edt' && $tplvar.page.header)}> checked="checked"<{/if}> />
+		<label for="STPGFormHeaderYes"><{$smarty.const._MD_STPG_YES}></label>&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="radio" id="STPGFormHeaderNo" name="header" value="0"<{if $tplvar.option == 'edt' && !$tplvar.page.header}> checked="checked"<{/if}> />
+		<label for="STPGFormHeaderNo"><{$smarty.const._MD_STPG_NO}></label>
+	</dd>
+	<dt><{$smarty.const._MD_STPG_PAGE_NAVIGATION}></dt>
+	<dd>
+		<input type="radio" id="STPGFormNavigationYes" name="navigation" value="1"<{if $tplvar.option == 'add' || ($tplvar.option == 'edt' && $tplvar.page.navigation)}> checked="checked"<{/if}> />
+		<label for="STPGFormNavigationYes"><{$smarty.const._MD_STPG_YES}></label>&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="radio" id="STPGFormNavigationNo" name="navigation" value="0"<{if $tplvar.option == 'edt' && !$tplvar.page.navigation}> checked="checked"<{/if}> />
+		<label for="STPGFormNavigationNo"><{$smarty.const._MD_STPG_NO}></label>
+	</dd>
+	<dt><{$smarty.const._MD_STPG_PAGE_ROUTER}></dt>
+	<dd>
+		<input type="radio" id="STPGFormRouterYes" name="router" value="1"<{if $tplvar.option == 'add' || ($tplvar.option == 'edt' && $tplvar.page.router)}> checked="checked"<{/if}> />
+		<label for="STPGFormRouterYes"><{$smarty.const._MD_STPG_YES}></label>&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="radio" id="STPGFormRouterNo" name="router" value="0"<{if $tplvar.option == 'edt' && !$tplvar.page.router}> checked="checked"<{/if}> />
+		<label for="STPGFormRouterNo"><{$smarty.const._MD_STPG_NO}></label>
+	</dd>
+	<dt><{$smarty.const._MD_STPG_PAGE_BLOCKS}></dt>
+	<dd>
+		<ul>
+		<{foreach from=$tplvar.blocks item=block name=blocks}>
+		<li><input type="checkbox" id="STPGFormBlocks<{$block.id}>" name="blocks[]" value="<{$block.id}>"<{if $tplvar.option == 'add' || ($tplvar.option == 'edt' && $block.checked)}> checked="checked"<{/if}> /><label for="STPGFormBlocks<{$block.id}>"><{$block.title}></label></li>
+		<{/foreach}>
+		</ul>
+	</dd>
+	<dd>
+	<input type="submit" value="<{$smarty.const._SEND}>" /><input type="reset" value="<{$smarty.const._MD_STPG_RESET}>" />
+	<input type="hidden" name="submitted" value="true" />
+	</dd>
+</dl>
+</fieldset>
+</form>
+<{elseif $tplvar.option == 'mov'}>
+	<ul id="STPGRouter">
+	<{foreach from=$tplvar.router item=rtr name=router}>
+		<li><a href="page.php?option=viw&sid=<{$tplvar.sid}>&pid=<{$rtr.id}>" title="<{$rtr.title}>"><{$rtr.title}></a></li>
+	<{/foreach}>
+	<li><a href="<{$smarty.server.REQUEST_URI}>" title="<{$tplvar.header}>"><{$tplvar.header}></a></li>
+	</ul>
+	<div id="STPGHeader"><{$tplvar.header}></div>
+	<p><{$smarty.const._MD_STPG_PAGE_MOVPAGE_DESC}></p>
+	<{$tplvar.tree_string}>
+<{else}>
+	<div id="STPGPage">
+	<{if $tplvar.page.header || $tplvar.option == 'tre'}>
+		<div id="STPGPageHeader">
+		<div id="STPGPageSiteTitle"><a href="page.php?option=viw&sid=<{$tplvar.sid}>" title="<{$tplvar.site.title}>"><{$tplvar.site.title}></a></div>
+		<div id="STPGPageSiteSlogan"><{$tplvar.site.slogan}></div>
+		</div>
+	<{/if}>
+	<{if $tplvar.page.navigation}>
+		<div id="STPGPageHeaderNavigation<{if $tplvar.page.header || $tplvar.option == 'tre'}>WithHD<{else}>NoHD<{/if}>">
+			<ul>
+			<li><a href="page.php?sid=<{$tplvar.sid}>" title="<{$smarty.const._MD_STPG_BLOCK_BACKHOME}>"><{$smarty.const._MD_STPG_BLOCK_BACKHOME}></a></li>
+			<li><a href="page.php?option=tre&sid=<{$tplvar.sid}>" title="<{$smarty.const._MD_STPG_BLOCK_SITETREE}>"><{$smarty.const._MD_STPG_BLOCK_SITETREE}></a></li>
+			</ul>
+		</div>
+	<{/if}>
+	<div id="STPGPageContent<{if $tplvar.page.blocks || $tplvar.option == 'vfl'}><{if $tplvar.site.block_location}>Left<{else}>Right<{/if}><{else}>ALL<{/if}>">
+	<{if $tplvar.option == 'tre'}>
+		<{$tplvar.tree_string}>
+	<{elseif $tplvar.option == 'vfl'}>
+		<{if $tplvar.page.router}>
+			<ul id="STPGPageRouter">
+			<{foreach from=$tplvar.router item=rtr name=router}>
+				<li><a href="page.php?option=viw&sid=<{$tplvar.sid}>&pid=<{$rtr.id}>" title="<{$rtr.title}>"><{$rtr.title}></a></li>
+			<{/foreach}>
+			</ul>
+		<{else}>
+			<ul id="STPGPageRouter">
+				<li><a href="page.php?option=viw&sid=<{$tplvar.sid}>&pid=<{$tplvar.pid}>" title="<{$tplvar.page.title}>"><{$tplvar.page.title}></a></li>
+			</ul>
+		<{/if}>
+		<div id="STPGPagePageTitle"><{$tplvar.file.file_name}></div>
+		<div><{$tplvar.embed_html}></div>
+	<{else}>
+		<{if $tplvar.page.router}>
+			<ul id="STPGPageRouter">
+			<{foreach from=$tplvar.router item=rtr name=router}>
+				<li><a href="page.php?option=viw&sid=<{$tplvar.sid}>&pid=<{$rtr.id}>" title="<{$rtr.title}>"><{$rtr.title}></a></li>
+			<{/foreach}>
+			</ul>
+		<{/if}>
+		<div id="STPGPagePageTitle"><{$tplvar.page.title}></div>
+		<{if $tplvar.page.page_type}>
+			<dl id="STPGPageListFiles">
+			<{foreach from=$tplvar.files item=file name=files}>
+				<dt><a href="file.php?option=fl&fid=<{$file.id}>" title="<{$file.description}>"><{$file.file_name}></a></dt>
+				<dd>
+					<div><img src="<{$file.icon}>" alt="" /><!-- <{$smarty.const._MD_STPG_PAGE_FILE}><{$smarty.const._MD_STPG_FILE_ICON}> --></div>
+					<ul>
+					<li>(<{$file.counter}>)&nbsp;&nbsp;<{$file.file_size|number_format:""}></li>
+					<li><{$file.date_time|date_format:'%Y-%m-%d %H:%M:%S'}></li>
+					<{if $file.view || $tplvar.auth.is_site_edit}>
+					<li class="STPGPageListFilesDelete">
+						<{if $file.view}>
+						<a href="page.php?option=vfl&sid=<{$tplvar.sid}>&fid=<{$file.id}>" title="<{$smarty.const._MD_STPG_VIEW}>"><{$smarty.const._MD_STPG_VIEW}></a>
+						<{/if}>
+						<{if $tplvar.auth.is_site_edit}>
+						<a href="file.php?option=df&fid=<{$file.id}>" title="<{$smarty.const._MD_STPG_DELETE}>"><{$smarty.const._MD_STPG_DELETE}></a>
+						<{/if}>
+					</li>
+					<{/if}>
+					</ul>
+				</dd>
+			<{/foreach}>
+			<{if $tplvar.auth.is_site_edit}>
+			<dt><{$smarty.const._MD_STPG_PAGE_FILE}></dt>
+			<dd>
+				<form id="STPGForm" method="post" action="<{$smarty.server.REQUEST_URI}>" enctype="multipart/form-data">
+				<fieldset>
+				<legend><{$smarty.const._MD_STPG_PAGE_FILE}></legend>
+				<{$smarty.const._MD_STPG_PAGE_FILE_DESC}>
+				<ul id="STPGFormFileField">
+					<li>
+					<input type="file" name="file[]" size="10" /><br />
+					<input type="text" name="description[]" value="" />
+					</li>
+				</ul>
+				<ul>
+					<li id="STPGFormAddField"><input type="button" value="<{$smarty.const._MD_STPG_PAGE_FILE_ADDFIELD}>" /></li>
+				</ul>
+				<input type="submit" value="<{$smarty.const._SEND}>" /><input type="reset" value="<{$smarty.const._MD_STPG_RESET}>" />
+				<input type="hidden" name="submitted" value="true" />
+				</fieldset>
+				</form>
+			</dd>
+			<{/if}>
+			</dl>
+		<{else}>
+			<{$tplvar.page.content}>
+		<{/if}>
+	<{/if}>
+	</div>
+	<div id="STPGPageMenu<{if $tplvar.page.blocks || $tplvar.option == 'vfl'}><{if $tplvar.site.block_location}>Right<{else}>Left<{/if}><{else}>None<{/if}>">
+	<{foreach from=$tplvar.page.blocks item=block name=blocks}>
+		<div class="STPGPageBlockTitle"><{$block.title}></div>
+		<div class="STPGPageBlockContent">
+		<{if $block.block_type == 1}>
+		<ul>
+		<li><a href="page.php?sid=<{$tplvar.sid}>" title="<{$smarty.const._MD_STPG_BLOCK_BACKHOME}>"><{$smarty.const._MD_STPG_BLOCK_BACKHOME}></a></li>
+		<li><a href="page.php?option=tre&sid=<{$tplvar.sid}>" title="<{$smarty.const._MD_STPG_BLOCK_SITETREE}>"><{$smarty.const._MD_STPG_BLOCK_SITETREE}></a></li>
+		</ul>
+		<{elseif $block.block_type == 2}>
+		<ul class="STPGPageBlockPagetype">
+		<{foreach from=$tplvar.childpages item=childpage name=childpages}>
+			<li class="<{if $childpage.page_type}>STPGPageBlockPagetypeFolder<{else}>STPGPageBlockPagetypePage<{/if}>"><a href="page.php?option=viw&&sid=<{$tplvar.sid}>&pid=<{$childpage.id}>" title="<{$childpage.title}>"><{$childpage.title}></a></li>
+		<{/foreach}>
+		</ul>
+		<{else}>
+		<{$block.content}>
+		<{/if}>
+		</div>
+	<{/foreach}>
+	<{if $tplvar.option == 'vfl'}>
+	<div class="STPGPageBlockTitle"><{$smarty.const._MD_STPG_VIEW}><{$smarty.const._MD_STPG_PAGE_FILE}></div>
+	<div class="STPGPageBlockContent">
+	<ul>
+		<{foreach from=$tplvar.files item=file name=files}>
+		<{if $file.view}>
+			<li <{if $file.id == $tplvar.file.id}>class="STPGPageThefile"<{/if}>><a href="page.php?option=vfl&sid=<{$tplvar.sid}>&fid=<{$file.id}>" title="<{$file.description}>"><{$file.file_name}></a></li>
+		<{/if}>
+		<{/foreach}>
+	</ul>
+	</div>
+	<{/if}>
+	</div>
+	</div>
+<{/if}>
+
+</div>
